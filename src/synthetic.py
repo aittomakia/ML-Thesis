@@ -1,4 +1,5 @@
-# Create synthetic data that generates 20 images of the given sample image
+# Create synthetic data that generates 20 skewed and rotated images of the given sample image
+# If the folder contains 10 samples this generator will create 200 images to that folder
 
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 import argparse

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI Classification</title>
+  <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+  >
+</head>
+<style>
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-wrapper {
+    width: 100%;
+    padding: 2em;
+    border-bottom: 1px solid #292929;
+    color: #292929;
+    font-size: 0.9em;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    padding: 0 2em 2em 2em;
+    border-bottom: 1px solid #292929;
+    color: #292929;
+  }
+
+  .submit, .file-upload {
+    width: 100%;
+    margin-top: 1em;
+  }
+
+  .form-header {
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
+
+  footer {
+    padding: 1em;
+    text-align: center;
+    font-size: 0.8em;
+    color: #888888;
+  }
+
+</style>
+<body>
+  <main class="site-wrapper">
+    <div class="container">
+      <div class="header-wrapper">
+        <h1>UI Component / Building block Classification</h1>
+      </div>
+      <div class="form-wrapper">
+        <h4 class="form-header">Upload an Image</h4>
+        <form method=post enctype=multipart/form-data>
+          <!-- <div class="file-upload"> -->
+            <input type="file" name="file" />
+          <!-- </div> -->
+          <!-- <div class="submit"> -->
+            <button class="mdc-button" type=submit>Upload and classify</button>
+          <!-- </div> -->
+        </form>
+      </div>
+    </div>
+   </main>
+   <footer>
+     <p>
+       Ari Aittomäki 2018
+     </p>
+   </footer>
+</body>
+</html>
