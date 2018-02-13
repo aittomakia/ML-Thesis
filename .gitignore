@@ -9,6 +9,9 @@ __pycache__/
 # Image data
 data/
 
+# Components
+components/
+
 # Distribution / packaging
 .Python
 env/
@@ -70,6 +73,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# node
+node_modules/*
 
 # Jupyter Notebook
 .ipynb_checkpoints

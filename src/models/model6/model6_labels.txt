@@ -1,0 +1,6 @@
+button
+hero
+image
+navigation
+picture
+text

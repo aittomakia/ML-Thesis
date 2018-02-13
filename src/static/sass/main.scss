@@ -1,0 +1,83 @@
+
+// 2. Import default variables and available mixins.
+@import "../components/uikit/src/scss/variables-theme.scss";
+@import "../components/uikit/src/scss/mixins-theme.scss";
+
+// 3. Your custom mixin overwrites.
+@mixin hook-card() { color: #000; }
+
+// 4. Import UIkit.
+@import "../components/uikit/src/scss/uikit-theme.scss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.header-wrapper {
+  width: 100%;
+  padding: 2em;
+  border-bottom: 1px solid #292929;
+  color: #292929;
+  font-size: 0.8em;
+  height: 20vh;
+  //display: flex;
+  //align-items: center;
+}
+
+.tile-wrapper {
+  width: 100%;
+  padding: 0;
+  border-bottom: 1px solid #292929;
+  min-height: 200px;
+}
+
+.form-wrapper {
+  width: 100%;
+  padding: 2em;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.submit, .file-upload {
+  width: 90%;
+  margin-top: 1em;
+}
+
+.js-upload {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+}
+
+.form-header {
+  padding-top: 1em;
+  padding-bottom: 2em;
+}
+.result-wrapper {
+
+  .result__image {
+    padding-top: 2em;
+    display: block;
+    text-align: center;
+  }
+
+  .result__numbers {
+    padding-left: 0;
+    list-style: none;
+    font-weight: lighter;
+    margin-bottom: 0px;
+
+    li:first-child {
+      font-weight: bold;
+    }
+  }
+}
+
+footer {
+  padding: 1em;
+  text-align: center;
+  font-size: 0.8em;
+  color: #888888;
+}

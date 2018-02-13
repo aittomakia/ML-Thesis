@@ -1,0 +1,7 @@
+{
+  "name": "ML-Thesis",
+  "dependencies": {
+    "jquery": "~3.3.0",
+    "uikit": "~3.0.0"
+  }
+}

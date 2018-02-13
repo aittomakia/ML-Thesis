@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI Classification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/app.min.css') }}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit-icons.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+  <main class="site-wrapper">
+    <div class="container">
+      <div class="uk-tile uk-tile-primary header-wrapper">
+        <h1 class="uk-text-lead">UI classification</h1>
+        <p class="uk-text-meta">
+          Easily classify your hand drawn ui components
+        </p>
+      </div>
+      <div class="uk-tile uk-tile-muted tile-wrapper">
+        <div class="form-wrapper">
+          <p class="form-header">Upload an Image</p>
+          <form action={{url_for('route.home')}} method=post enctype=multipart/form-data>
+              <input type="file" name="file" />
+              <button class="" type=submit>Upload and classify</button>
+          </form>
+
+          <div class="result-wrapper">
+            {% if image_path and output %}
+            <img class="result__image" src={{url_for('static', filename=image_path)}} height="auto" width="400px" />
+            <ul class="result__numbers">
+              {% for result in output %}
+                <li>
+                  <p>{{ result.label }} <span>({{ result.confidence }}%)</span> </p>
+                </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+   </main>
+   <footer>
+     <p>
+       Ari Aittomäki 2018
+     </p>
+   </footer>
+</body>
+</html>
