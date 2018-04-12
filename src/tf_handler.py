@@ -58,15 +58,15 @@ def load_labels(label_file):
     label.append(l.rstrip())
   return label
 
-def predict(file_path, UPLOAD_FOLDER):
-    model_file = "src/models/model6/model6.pb"
-    label_file = "src/models/model6/model6_labels.txt"
-    input_height = 299
-    input_width = 299
+def predict(file_path):
+    model_file = "src/models/latest/output_graph.pb"
+    label_file = "src/models/latest/output_labels.txt"
+    input_height = 224
+    input_width = 224
     input_mean = 128
     input_std = 128
-    # input_layer = "input" # For Mobilenet
-    input_layer = "Mul" # For Inception V3
+    input_layer = "input" # For Mobilenet
+    #input_layer = "Mul" # For Inception V3
     output_layer = "final_result"
 
     graph = load_graph(model_file)

@@ -16,20 +16,32 @@ html, body {
 
 .header-wrapper {
   width: 100%;
-  padding: 2em;
   border-bottom: 1px solid #292929;
   color: #292929;
-  font-size: 0.8em;
-  height: 20vh;
-  //display: flex;
-  //align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  align-items: center;
+  overflow: hidden;
+
+  .header {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 999;
+  }
 }
 
 .tile-wrapper {
   width: 100%;
   padding: 0;
-  border-bottom: 1px solid #292929;
   min-height: 200px;
+}
+
+.info-text {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .form-wrapper {
@@ -73,6 +85,13 @@ html, body {
       font-weight: bold;
     }
   }
+}
+
+.image__form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2em;
 }
 
 footer {

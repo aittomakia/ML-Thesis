@@ -8,6 +8,7 @@ __pycache__/
 
 # Image data
 data/
+src/static/upload
 
 # Components
 components/

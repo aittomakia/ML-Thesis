@@ -12,29 +12,33 @@
   <main class="site-wrapper">
     <div class="container">
       <div class="uk-tile uk-tile-primary header-wrapper">
-        <h1 class="uk-text-lead">UI classification</h1>
-        <p class="uk-text-meta">
-          Easily classify your hand drawn ui components
-        </p>
+        <h1 class="uk-text-lead">UI Generator configurator</h1>
       </div>
       <div class="uk-tile uk-tile-muted tile-wrapper">
         <div class="form-wrapper">
-          <p class="form-header">Upload an Image</p>
+          {% if not output %}
+          <p class="form-header">Upload an Image you want to turn into a user interface</p>
           <form action={{url_for('route.home')}} method=post enctype=multipart/form-data>
               <input type="file" name="file" />
               <button class="" type=submit>Upload and classify</button>
           </form>
+          {% endif %}
 
           <div class="result-wrapper">
             {% if image_path and output %}
-            <img class="result__image" src={{url_for('static', filename=image_path)}} height="auto" width="400px" />
             <ul class="result__numbers">
-              {% for result in output %}
-                <li>
-                  <p>{{ result.label }} <span>({{ result.confidence }}%)</span> </p>
-                </li>
-              {% endfor %}
+              <p class="form-header">Select the components you want to render</p>
+              <form action={{url_for('images')}} method=post enctype=multipart/form-data>
+                {% for result in output %}
+                  <div class="image__form">
+                    <input name="images" id="id_{{result.file}}" type=checkbox value={{result.label}} /><span style="width: 200px"> {{result.label}} ({{ result.confidence }}%)</span><br />
+                    <img style="margin-left: 2em;" src={{url_for('static', filename=result.file)}} height="auto" width="auto" />
+                  </div>
+                {% endfor %}
+                <button class="" type=submit>Create UI</button>
+              </form>
             </ul>
+            <img class="result__image" src={{url_for('static', filename=image_path)}} height="auto" width="400px" />
             {% endif %}
           </div>
         </div>
