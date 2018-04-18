@@ -6,13 +6,8 @@ import numpy as np
 '''
 Based on this code by Abid Rahman K:
 https://dsp.stackexchange.com/questions/2564/opencv-c-connect-nearby-contours-based-on-distance-between-them
-Edit 7-dec: added sort (fixed bug creating multiple boxes)
-Edit 8-dec: X sort is enough
-Edit 12-dec: added comment about MSER + threshold
 '''
 
-# I'm interested in grouping letters into text so I group only elements that are
-# close and on the same line. Change this to allow freeform groupings.
 def is_close(rect1,rect2):
 
     max_x1, min_x1, max_y1, min_y1 = rect1[0]+rect1[2],rect1[0],rect1[1]+rect1[3],rect1[1]
@@ -25,12 +20,12 @@ def is_close(rect1,rect2):
     xdiff = abs(max(min_x1,min_x2) - min(max_x1, max_x2))
 
     # how far vertically are the centroids of the boxes
-    mean_y1=(max_y1+min_y1) / 2.
-    mean_y2=(max_y2+min_y2) / 2.
+    mean_y1 = (max_y1+min_y1) / 2.
+    mean_y2 = (max_y2+min_y2) / 2.
     ydiff = abs(mean_y1 - mean_y2)
 
     # we use two different thresholds
-    if xdiff < 100 and ydiff < 25:
+    if xdiff < 100 and ydiff < 20:
         return True
     return False
 
@@ -59,12 +54,12 @@ def sortByX(item):
     return item[1][0]
 
 # the real deal
-def find_words(img):
+def find_components(img):
 
     # convert to gray and binary threshold
     # gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     gray = img
-    _,thresh = cv2.threshold(gray,127,255,0)
+    _,thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
 
     # let's find the contours
     mser=True
@@ -78,7 +73,7 @@ def find_words(img):
         # First because it is much, much faster. Second because it gives me better results.
         # So you may ask: why are you using MSER in the first place? Because this "wrong"
         # combo is giving me the best results so far. Advices are welcome.
-        regions = mser.detectRegions(img)
+        regions = mser.detectRegions(thresh)
         hulls = [cv2.convexHull(p.reshape(-1, 1, 2)) for p in regions[0]]
         contours = hulls
     else:
@@ -173,7 +168,7 @@ def applyMask(img, contours):
 
 def trace(img_path_and_name, image_name ,UPLOAD_FOLDER):
 
-    start= time.time()
+    start = time.time()
 
     img = cv2.imread(img_path_and_name, 0)
 
@@ -190,7 +185,7 @@ def trace(img_path_and_name, image_name ,UPLOAD_FOLDER):
         # resize image
         img = cv2.resize(img, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv2.INTER_AREA)
 
-    unified = find_words(img)
+    unified = find_components(img)
 
     print("Elapsed: ", (time.time()-start), "s")  # 0.078s for an 800x600 img
 
@@ -206,13 +201,13 @@ def trace(img_path_and_name, image_name ,UPLOAD_FOLDER):
         f_name = str('temp/{}.png'.format(str(image_name + "-" + str(i))))
         filenames.append(f_name)
         cv2.imwrite(str(str(UPLOAD_FOLDER) + '/temp/{}.png'.format(str(image_name + "-" + str(i)))), img[y:y+h,x:x+w])
-        # cv2.rectangle(draw_img, (x,y), (x+w,y+h), (255, 0, 0), 1)
+        cv2.rectangle(draw_img, (x,y), (x+w,y+h), (255, 0, 0), 1)
     # cv2.imshow('result', draw_img)
-    # cv2.waitKey(0)
+    # # optionally apply a mask
+    result = applyMask(img, unified_cnt)
+    result = cv2.bitwise_and(img, img, unified_cnt)
+    cv2.imwrite("result.png", result);
+
     return filenames
-    # optionally apply a mask
-    # result = applyMask(img, unified_cnt)
-    # result = cv2.bitwise_and(img, img, unified_cnt)
-    # cv2.imwrite("result.png", result);
 
     # cv2.destroyAllWindows()
