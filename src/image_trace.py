@@ -204,9 +204,9 @@ def trace(img_path_and_name, image_name ,UPLOAD_FOLDER):
         cv2.rectangle(draw_img, (x,y), (x+w,y+h), (255, 0, 0), 1)
     # cv2.imshow('result', draw_img)
     # # optionally apply a mask
-    result = applyMask(img, unified_cnt)
-    result = cv2.bitwise_and(img, img, unified_cnt)
-    cv2.imwrite("result.png", result);
+    # result = applyMask(img, unified_cnt)
+    # result = cv2.bitwise_and(img, img, unified_cnt)
+    # cv2.imwrite("result.png", result);
 
     return filenames
 

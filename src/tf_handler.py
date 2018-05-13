@@ -58,8 +58,7 @@ def load_labels(label_file):
     label.append(l.rstrip())
   return label
 
-def predict(file_path):
-    model_file = "src/models/latest/output_graph.pb"
+def predict(file_path, graph):
     label_file = "src/models/latest/output_labels.txt"
     input_height = 224
     input_width = 224
@@ -69,7 +68,6 @@ def predict(file_path):
     #input_layer = "Mul" # For Inception V3
     output_layer = "final_result"
 
-    graph = load_graph(model_file)
     t = read_tensor_from_image_file(file_path,
                                     input_height=input_height,
                                     input_width=input_width,

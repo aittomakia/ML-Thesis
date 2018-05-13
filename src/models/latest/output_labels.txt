@@ -1,4 +1,4 @@
-hero
+textblock
 imagewithtext
 navigation
-textblock
+hero
