@@ -14,7 +14,6 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gulp build",
     "bower": "bower install",
     "start": "export FLASK_APP=src/app.py && flask run",
     "serve-and-watch": "gulp default"
